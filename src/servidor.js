@@ -4,6 +4,8 @@ const express = require('express')
 const app = express()
 const bodyParse = require('body-parser')
 const bancoDeDados = require('./bancoDeDados')
+const receitas = require('./receitas.json')
+const filtrarReceitas = require('./filtrarReceitas');
 
 app.use(bodyParse.urlencoded({extended:true}))
 
@@ -29,6 +31,27 @@ app.post('/usuarios', (req, res, next) => {
     res.send(usuarios) // JSON
 })
 
+app.get('/receitas/:id', (req, res, next) => {
+    const id = req.params.id;
+    const receita = receitas.find(r => r.id === id);
+    
+    if (!receita) {
+      return res.status(404).send('Receita não encontrada');
+    } else {
+        res.json(receita);
+    }
+});
+
+app.get('/receitas', (req, res,next) => {
+    //res.json(receitas)
+    const restricoes = bancoDeDados.getUsuario(req.params.restricoes);
+    const objetivos = bancoDeDados.getUsuario(req.params.objetivos);
+    const receitas = req.json(receitas);
+  
+    const receitasFiltradas = filtrarReceitas(restricoes, objetivos, receitas);
+  
+    res.json(receitasFiltradas);
+})
 
 app.listen(porta, () =>{
     console.log(`Servidor execultando na porta ${porta}`)
