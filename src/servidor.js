@@ -6,7 +6,7 @@ const bodyParse = require('body-parser')
 const fs = require('fs');
 const bancoDeDados = require('./bancoDeDados')
 const receitas = require('./receitas.json')
-const receitasFiltradas = require('./openai');
+const ReceitasFiltradas = require('./openai');
 
 app.use(bodyParse.urlencoded({extended:true}))
 
@@ -32,19 +32,18 @@ app.post('/usuarios', (req, res, next) => {
     res.send(usuarios) // JSON
 })
 
-app.get('/receitas/:id', (req, res, next) => {
-    const id = req.params.id;
-    const receita = receitas.find(r => r.id === id);
-    
-    if (!receita) {
-      return res.status(404).send('Receita não encontrada');
-    } else {
-        res.json(receita);
-    }
+app.get('/receitas/:id', async function (req, res, next) {
+    const receitasFiltradas = new ReceitasFiltradas();
+    const idUsuario = req.params.id;
+    const restricoes = bancoDeDados.getUsuario(idUsuario).restricoes;
+    const objetivos = bancoDeDados.getUsuario(idUsuario).objetivos;
 
-   //const idUsuario = req.params.id;
-   //const restricoes = bancoDeDados.getUsuario(idUsuario).restricoes;
-   //const objetivos = bancoDeDados.getUsuario(idUsuario).objetivos;
+    let text = await receitasFiltradas.get(JSON.stringify(req.query.restricoes))
+
+    res.send(text.map(item => {
+        return `${item.text}`;
+    }).join(''));
+
    //const receita = JSON.parse(fs.readFileSync('./src/receitas.json', 'utf-8'));
    //const receitasFiltradas = filtrarReceitas.filtrarReceitas(restricoes, objetivos, receita);
 

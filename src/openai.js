@@ -6,10 +6,10 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
   
 class ReceitasFiltradas {
-    get = async (prompt) => {
+    get = async () => {
         const response = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: prompt,
+            model: "text-davinci-002",
+            prompt: "Me dê uma receita para uma pessoa que é vegana",
             temperature: 0.9,
             max_tokens: 1000,
         });
