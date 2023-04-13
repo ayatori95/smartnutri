@@ -1,10 +1,10 @@
-function filtrarReceitas(restricoes, objetivos, receitas) {
+function filtrarReceitas(restricoes, objetivos, receita) {
     // cria um array vazio para as receitas filtradas
     const receitasFiltradas = [];
   
     // loop pelas receitas
-    for (let i = 0; i < receitas.length; i++) {
-      const receita = receitas[i];
+    for (let i = 0; i < receita.length; i++) {
+      const receita = receita[i];
       let atendeRestricoes = true;
       let atendeObjetivos = false;
   

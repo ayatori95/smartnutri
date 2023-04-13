@@ -3,6 +3,7 @@ const porta = 3003
 const express = require('express')
 const app = express()
 const bodyParse = require('body-parser')
+const fs = require('fs');
 const bancoDeDados = require('./bancoDeDados')
 const receitas = require('./receitas.json')
 const filtrarReceitas = require('./filtrarReceitas');
@@ -40,17 +41,18 @@ app.get('/receitas/:id', (req, res, next) => {
     } else {
         res.json(receita);
     }
+
+   //const idUsuario = req.params.id;
+   //const restricoes = bancoDeDados.getUsuario(idUsuario).restricoes;
+   //const objetivos = bancoDeDados.getUsuario(idUsuario).objetivos;
+   //const receita = JSON.parse(fs.readFileSync('./src/receitas.json', 'utf-8'));
+   //const receitasFiltradas = filtrarReceitas.filtrarReceitas(restricoes, objetivos, receita);
+
+    res.json(receitasFiltradas);
 });
 
 app.get('/receitas', (req, res,next) => {
-    //res.json(receitas)
-    const restricoes = bancoDeDados.getUsuario(req.params.restricoes);
-    const objetivos = bancoDeDados.getUsuario(req.params.objetivos);
-    const receitas = req.json(receitas);
-  
-    const receitasFiltradas = filtrarReceitas(restricoes, objetivos, receitas);
-  
-    res.json(receitasFiltradas);
+    res.json(receitas)
 })
 
 app.listen(porta, () =>{
