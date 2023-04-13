@@ -6,7 +6,7 @@ const bodyParse = require('body-parser')
 const fs = require('fs');
 const bancoDeDados = require('./bancoDeDados')
 const receitas = require('./receitas.json')
-const filtrarReceitas = require('./filtrarReceitas');
+const receitasFiltradas = require('./openai');
 
 app.use(bodyParse.urlencoded({extended:true}))
 
@@ -48,7 +48,7 @@ app.get('/receitas/:id', (req, res, next) => {
    //const receita = JSON.parse(fs.readFileSync('./src/receitas.json', 'utf-8'));
    //const receitasFiltradas = filtrarReceitas.filtrarReceitas(restricoes, objetivos, receita);
 
-    res.json(receitasFiltradas);
+    
 });
 
 app.get('/receitas', (req, res,next) => {
