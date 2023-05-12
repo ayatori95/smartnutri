@@ -2,24 +2,15 @@ const porta = 3003
 
 const express = require('express')
 const app = express()
+const router = express.Router();
 const bodyParse = require('body-parser')
-const bancoDeDados = require('./bancodedados.js')
+const bancoDeDados = require('./bancodedados.js');
+const { use } = require('./routes/index.js');
 
 
-app.use(bodyParse.urlencoded({extended:true}));
+router.use(bodyParse.urlencoded({extended:true}));
 
-app.get('/usuarios', (req, res,next) => { // caso utilizar use no lugar de get, qualquer url irá responder a requisição
-    const sql = 'SELECT * FROM usuarios';
-    bancoDeDados.query(sql, (err, result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send('Erro ao buscar usuários');
-      } else {
-        console.log('Usuários encontrados!');
-        res.status(200).send(result);
-      }
-    });
-})
+router.get('/usuarios', userController.exibirUsuarios(req, res));
 
 app.get('/usuarios/:id', (req,res, next) => {
     const id = req.params.id;
