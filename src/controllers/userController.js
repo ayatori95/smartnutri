@@ -15,10 +15,9 @@ const userController = {
       }
     });
   },
-  exibirUsuario(req, res) {
-    const id = req.params.id;
-    const sql = `SELECT * FROM usuarios WHERE idusuarios = ${id}`;
-    bancoDeDados.query(sql, (err, result) => {
+  async exibirUsuario(req, res) {
+    const userData = req.params.id;
+    await databaseService.pesquisarUsuario(userData, (err, result) => {
       if (err) {
         console.log(err);
         res.status(500).send("Erro ao buscar usuário");

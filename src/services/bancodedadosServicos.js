@@ -12,11 +12,18 @@ class DatabaseService {
 
   async criarUsuario(userData) {
     try {
-      const [result] = await this.connection.query("INSERT INTO usuarios (nome, idade, genero, altura, peso, restricao, objetivo) VALUES (?, ?, ?, ?, ?, ?, ?)", userData);
-      const userId = result.insertId;
-      return { id: userId, ...userData };
+      await this.connection.query("INSERT INTO usuarios (nome, idade, genero, altura, peso, restricao, objetivo) VALUES (?, ?, ?, ?, ?, ?, ?)", userData);
     } catch (error) {
       throw new Error('Erro ao criar usuário no banco de dados');
+    }
+  }
+
+  async pesquisarUsuario(userData) {
+    try {
+      const result = await this.connection.query("SELECT * FROM usuarios WHERE idusuarios = ?", userData);
+      return result;
+    } catch (error) {
+      throw new Error('Erro ao pesquisar usuário no banco de dados');
     }
   }
 
