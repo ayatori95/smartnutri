@@ -1,3 +1,7 @@
+const DatabaseService = require('../services/bancodedadosServicos');
+
+const databaseService = new DatabaseService();
+
 const userController = {
   exibirUsuarios(req, res) {
     const sql = "SELECT * FROM usuarios";
@@ -24,19 +28,9 @@ const userController = {
       }
     });
   },
-  salvarUsuario(req, res) {
-    const usuarios = bancoDeDados.query(
-      "INSERT INTO usuarios (nome, idade, genero, altura, peso, restricao, objetivo) VALUES (?, ?, ?, ?, ?, ?, ?)",
-      [
-        req.body.nome,
-        req.body.idade,
-        req.body.genero,
-        req.body.altura,
-        req.body.peso,
-        req.body.restricao,
-        req.body.objetivo,
-      ],
-      (err, results) => {
+  async salvarUsuario(req, res) {
+    const userData = [req.body.nome,req.body.idade,req.body.genero,req.body.altura,req.body.peso,req.body.restricao,req.body.objetivo,];
+    await databaseService.createUser(userData, (err, results) => {
         if (err) {
           console.log(err);
           res.status(400).send("Erro ao salvar usuário");
@@ -44,8 +38,7 @@ const userController = {
           console.log("Usuário salvo com sucesso!");
           res.status(200).send(results);
         }
-      }
-    );
+      });
   },
 };
 
