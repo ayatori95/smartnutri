@@ -39,3 +39,5 @@ const receitasController = {
     })
   },
 };
+ //exporta o valor direto de receitasController para poder ser importado em outros arquivos
+module.exports = receitasController;

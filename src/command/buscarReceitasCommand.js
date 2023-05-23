@@ -3,11 +3,15 @@ class BuscarReceitasCommand extends Command {
     constructor(id) {
       super();
       this.id = id;
+      //NAO VI onde esta declarado o 'res', penso que precisa usar ele como parametro do construtor, para o mesmo poder ser usado
+      //sem ter erro ou declarar dentro bancoDeDados() abaixo  
+      this.res= res; // Agora quando for instanciar a classe, tem que fornece o res também
     }
   
     // Método execute é responsável por executar o comando
     execute() {
       const id = this.id;
+      const res = this.res; //adicionando a variável res ao método
       const sql = `SELECT restricao, objetivo FROM usuarios WHERE idusuarios = ${id}`;
       // Executa a consulta SQL para buscar as restrições e objetivos do usuário
       bancoDeDados.query(sql, (err, result) => {
@@ -32,19 +36,23 @@ class BuscarReceitasCommand extends Command {
           });
         }
       });
+
     }
   }
-  
+
+
   // Classe SalvarUsuarioCommand representa o comando para salvar um usuário
   class SalvarUsuarioCommand extends Command {
     constructor(userData) {
       super();
       this.userData = userData;
+      this.res = res;
     }
   
     // Método execute é responsável por executar o comando
     execute() {
       const userData = this.userData;
+      const res = this.res; //adicionando a variável res ao método
       // Chama o serviço do banco de dados para criar o usuário
       databaseService.createUser(userData, (err, results) => {
         if (err) {
@@ -57,4 +65,4 @@ class BuscarReceitasCommand extends Command {
       });
     }
   }
-  
+

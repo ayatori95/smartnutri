@@ -5,7 +5,7 @@ const databaseService = new DatabaseService();
 const userController = {
   exibirUsuarios(req, res) {
     const sql = "SELECT * FROM usuarios";
-    bancoDeDados.query(sql, (err, result) => {
+    databaseService.query(sql, (err, result) => {    // de onde vem a variavel 'bancoDeDados'? Eu poderia usar o 'databaseService' que é uma instância de DatabaseService(); 
       if (err) {
         console.log(err);
         res.status(500).send("Erro ao buscar usuários");
@@ -29,7 +29,7 @@ const userController = {
   },
   async salvarUsuario(req, res) {
     const userData = [req.body.nome,req.body.idade,req.body.genero,req.body.altura,req.body.peso,req.body.restricao,req.body.objetivo,];
-    await databaseService.createUser(userData, (err, results) => {
+    await databaseService.criarUsuario(userData, (err, results) => { //estava com o nome em inglês, creatUser --> criarUsario, agora pega o método dentro de bancodedadosServicos
         if (err) {
           console.log(err);
           res.status(400).send("Erro ao salvar usuário");

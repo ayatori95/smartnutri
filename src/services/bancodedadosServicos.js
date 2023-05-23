@@ -1,5 +1,5 @@
 const mysql = require('mysql2/promise');
-
+//Aqui se é feito o encapsulamento lógico necessário para interagir com o banco de dados
 class DatabaseService {
   constructor() {
     this.connection = mysql.createConnection({
@@ -11,7 +11,7 @@ class DatabaseService {
   }
 
   async criarUsuario(userData) {
-    try {
+    try { //ESTOU EM DÚVIDA QUANTO A FORAM QUE SE USA ESTE 'query' que também é usado nos controller, É UM MÉTODO ou apenas UM PEDIDO DE DADOS?
       await this.connection.query("INSERT INTO usuarios (nome, idade, genero, altura, peso, restricao, objetivo) VALUES (?, ?, ?, ?, ?, ?, ?)", userData);
     } catch (error) {
       throw new Error('Erro ao criar usuário no banco de dados');
