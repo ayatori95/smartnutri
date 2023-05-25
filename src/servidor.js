@@ -10,7 +10,7 @@ const { use } = require('./routes/index.js');
 
 router.use(bodyParse.urlencoded({extended:true}));
 
-router.get('/usuarios', userController.exibirUsuarios(req, res));
+router.get('/usuarios', userController.exibirUsuarios(req, res)); //parâmetro 'res' manipula a resposta de requisição feita
 
 app.get('/usuarios/:id', (req,res, next) => {
     const id = req.params.id;
