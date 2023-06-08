@@ -37,7 +37,7 @@ class DatabaseService {
     }
   }
 
-   async caracteristicasUsuario(id) {
+  async caracteristicasUsuario(id) {
     try { 
       const result = await this.connection.query(`SELECT restricao, objetivo FROM usuarios WHERE idusuarios = ${id}`, id);
       return result;
@@ -45,6 +45,25 @@ class DatabaseService {
       throw new Error('Erro ao retornar caracteristicas do usuário no banco de dados');
     }
   }
+
+  async listaReceitas() {
+    try { 
+      const result = await this.connection.query("SELECT * FROM receitas");
+      return result;
+    } catch (error) {
+      throw new Error('Erro ao retornar caracteristicas do usuário no banco de dados');
+    }
+  }
+
+  async listaReceitasUser(objetivo, restricao) {
+    try { 
+      const result = await this.connection.query("SELECT * FROM receitas WHERE restricao = ? AND objetivo = ?", [objetivo, restricao]);
+      return result;
+    } catch (error) {
+      throw new Error('Erro ao retornar caracteristicas do usuário no banco de dados');
+    }
+  }
+  
 }
 
 module.exports = DatabaseService;
