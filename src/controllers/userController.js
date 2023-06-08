@@ -3,9 +3,8 @@ const DatabaseService = require('../services/bancodedadosServicos');
 const databaseService = new DatabaseService();
 
 const userController = {
-  exibirUsuarios(req, res) {
-    const sql = "SELECT * FROM usuarios";
-    databaseService.query(sql, (err, result) => {    // de onde vem a variavel 'bancoDeDados'? Eu poderia usar o 'databaseService' que é uma instância de DatabaseService(); 
+  async exibirUsuarios(req, res) {
+    await databaseService.selecionarUsuarios((err, result) => {    // de onde vem a variavel 'bancoDeDados'? Eu poderia usar o 'databaseService' que é uma instância de DatabaseService(); 
       if (err) {
         console.log(err);
         res.status(500).send("Erro ao buscar usuários");

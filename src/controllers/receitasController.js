@@ -1,8 +1,11 @@
+const DatabaseService = require('../services/bancodedadosServicos');
+
+const databaseService = new DatabaseService();
+
 const receitasController = {
   async receitasId(req, res) {
     const id = req.params.id;
-    const sql = `SELECT restricao, objetivo FROM usuarios WHERE idusuarios = ${id}`;
-    bancoDeDados.query(sql, (err, result) => {
+    databaseService.caracteristicasUsuario(id, (err, result) => {
       if (err) {
         console.log(err);
         res
