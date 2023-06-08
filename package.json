@@ -5,7 +5,7 @@
   "main": "src/servidor.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/servidor.js && node config/bancodedadps.js"
+    "start": "node src/servidor.js && node src/model/user.js && node src/model/receitas.js"
   },
   "keywords": [],
   "author": "",

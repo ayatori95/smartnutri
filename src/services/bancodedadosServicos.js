@@ -10,6 +10,34 @@ class DatabaseService {
     });
   }
 
+  async connection() {
+    try {
+      await this.connection.connect();
+      console.log('Conectado ao banco de dados com sucesso!');
+    } catch (error) {
+      throw new Error('Erro ao conectar ao banco de dados');
+    }
+  }
+
+  async query(sql, values) {
+    try {
+      const result = await this.connection.query(sql, values);
+      return result;
+    } catch (error) {
+      throw new Error('Erro ao executar query no banco de dados');
+    }
+  }
+
+  async end() {
+    try {
+      await this.connection.end();
+      console.log('Conexão com o banco de dados encerrada com sucesso!');
+    } catch (error) {
+      throw new Error('Erro ao encerrar conexão com o banco de dados');
+    }
+  }
+
+
   async criarUsuario(userData) {
     try { //ESTOU EM DÚVIDA QUANTO A FORAM QUE SE USA ESTE 'query' que também é usado nos controller, É UM MÉTODO ou apenas UM PEDIDO DE DADOS?
       const result = await this.connection.query("INSERT INTO usuarios (nome, idade, genero, altura, peso, restricao, objetivo) VALUES (?, ?, ?, ?, ?, ?, ?)", userData);
@@ -63,7 +91,6 @@ class DatabaseService {
       throw new Error('Erro ao retornar caracteristicas do usuário no banco de dados');
     }
   }
-  
 }
 
 module.exports = DatabaseService;
