@@ -1,7 +1,7 @@
 // import BuscarReceitasCommand from '../command/buscarReceitasCommand'
 const Command = require('../command/command');
 const Memento = require('./defaultMemento.js');
-const Originator = requeire('./originatorMemento.js');
+const Originator = require('./originatorMemento.js');
 const Caretaker = require('./caretakerMemento');
 // Classe BuscarReceitasCommand representa o comando para buscar receitas com base em um ID de usuário
 class BuscarReceitasCommand extends Command {

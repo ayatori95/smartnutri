@@ -1,5 +1,5 @@
 // usei export para poder exportar em outros arquivos diretamento 
-export default class Memento {
+class Memento {
    constructor(state){
       this.state = state;
    }
@@ -8,3 +8,5 @@ export default class Memento {
       return this.state; // retorna o estado armazenado
   }
 }
+
+module.exports = Memento;
