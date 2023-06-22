@@ -91,6 +91,16 @@ class DatabaseService {
       throw new Error('Erro ao retornar caracteristicas do usuário no banco de dados');
     }
   }
+
+  async configurar (){//configurar() é devido ao templateMethod
+    try{
+      this.connection;
+      console.log('Banco de dados configurado com sucesso!');
+    }catch (error){
+      throw new Error('Erro ao configurar o banco de dados');
+    }
+  
+  }
 }
 
 module.exports = DatabaseService;

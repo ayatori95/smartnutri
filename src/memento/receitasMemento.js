@@ -6,6 +6,10 @@ const Originator = require('./originatorMemento');
 const receitasMemento = {
     memento: null,
 
+    configurar(){
+        //vaizo devido a não haver uma configuração específica para tal método
+      },
+    
     async receitasId(req,res){
         const id = req.params.id;
         const buscarReceitasCommand = new BuscarReceitasCommand(id, res); // instanciando o res para poder ser usado posteriormente

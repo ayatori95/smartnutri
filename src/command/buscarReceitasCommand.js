@@ -9,6 +9,10 @@ class BuscarReceitasCommand extends Command {
       
     }
   
+    configurar(){
+      //vaizo devido a não haver uma configuração específica para tal método
+    }
+
     // Método execute é responsável por executar o comando
     execute() {
       const id = this.id;
@@ -50,6 +54,9 @@ class BuscarReceitasCommand extends Command {
       this.res = res;
     }
   
+    configurar(){
+      //vaizo devido a não haver uma configuração específica para tal método
+    }
     // Método execute é responsável por executar o comando
     execute() {
       const userData = this.userData;

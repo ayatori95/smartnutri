@@ -3,13 +3,19 @@ const app = express();
 const bodyParse = require('body-parser');
 const userRoutes = require('./routes/index');
 
-app.use(bodyParse.urlencoded({ extended: true }));
+class Servidor {
+  configurar(){ 
+    app.use(bodyParse.urlencoded({ extended: true }));
 
-// Use as rotas do arquivo userRoutes
-app.use(userRoutes);
+    // Use as rotas do arquivo userRoutes
+    app.use(userRoutes);
 
-const porta = 3003;
+    const porta = 3003;
 
-app.listen(porta, () => {
-  console.log(`Servidor executando na porta ${porta}`);
-});
+    app.listen(porta, () => {
+   console.log(`Servidor executando na porta ${porta}`);
+    });
+  }
+}
+
+module.exports = Servidor;
