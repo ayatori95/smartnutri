@@ -46,8 +46,8 @@ const userController = {
       req.body.restricao,
       req.body.objetivo,
     ];
-    // Cria uma nova instância de SalvarUsuarioCommand, passando userData como argumento
-    const salvarUsuarioCommand = new SalvarUsuarioCommand(userData);
+    // Cria uma nova instância de SalvarUsuarioCommand, passando userData e o res como argumentos
+    const salvarUsuarioCommand = new SalvarUsuarioCommand(userData, res); // deve ter o res (nossa resposta HTTP) retornado de volta para o cliente
     // Executa o comando SalvarUsuarioCommand
     salvarUsuarioCommand.execute();
   },

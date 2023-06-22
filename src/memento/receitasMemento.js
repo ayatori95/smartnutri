@@ -8,12 +8,14 @@ const receitasMemento = {
 
     async receitasId(req,res){
         const id = req.params.id;
-        const buscarReceitasCommand = new BuscarReceitasCommand(id);
+        const buscarReceitasCommand = new BuscarReceitasCommand(id, res); // instanciando o res para poder ser usado posteriormente
 
         const state = {id: id}; // guarda o id em um estado
-        this.memento = new Memento(state);
+    
         const originator = new Originator();
-        this.memento = originator.createMemento(state);
+        this.memento = new Memento(state); // criando um novo memento com base no estado do objeto
+        originator.createMemento(this.memento.getState()); //uso do metodo createMemento em originator para se referir ao memento instanciado
+        buscarReceitasCommand.execute(); //executando a busca de receitas
     },
 
     receitas(req, res){
@@ -34,7 +36,7 @@ const receitasMemento = {
             const state = this.memento.getState();
             const originator = new Originator();
             originator.restoreMemento(state);
-        }
+        }        
     }
 };
 

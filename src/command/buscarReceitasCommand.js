@@ -6,6 +6,7 @@ class BuscarReceitasCommand extends Command {
       //NAO VI onde esta declarado o 'res', penso que precisa usar ele como parametro do construtor, para o mesmo poder ser usado
       //sem ter erro ou declarar dentro bancoDeDados() abaixo  
       this.res= res; // Agora quando for instanciar a classe, tem que fornece o res também
+      
     }
   
     // Método execute é responsável por executar o comando

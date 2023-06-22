@@ -1,7 +1,7 @@
 
 const Memento = require('./defaultMemento.js');
 
-export default class Originator{
+class Originator{
     constructor(){
         this.state = null;
     }
@@ -14,3 +14,5 @@ export default class Originator{
         this.state = memento.getState();
     }
 }
+
+module.exports = Originator;

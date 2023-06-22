@@ -1,6 +1,6 @@
 const Memento = require('./defaultMemento.js');
 //implementa a lista de estados 
-export default class Caretaker{
+class Caretaker{  //retirei o export default
     constructor(){
         this.mementos = [];
     }
@@ -13,3 +13,5 @@ export default class Caretaker{
         return this.mementos[index];
     }    
 }
+//exportando a classe Caretaker
+module.exports = Caretaker; 
