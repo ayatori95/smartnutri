@@ -1,18 +1,22 @@
 const mysql = require('mysql2/promise');
-//Aqui se é feito o encapsulamento lógico necessário para interagir com o banco de dados
+
 class DatabaseService {
-  constructor() {
-    this.connection = mysql.createConnection({
-      host: 'localhost',
-      user: 'username',
-      password: 'password',
-      database: 'database_name',
-    });
+  constructor(host, username, password, database) {
+    this.host = host;
+    this.username = username;
+    this.password = password;
+    this.database = database;
+    this.connection = null;
   }
 
-  async connection() {
+  async connect() {
     try {
-      await this.connection.connect();
+      this.connection = await mysql.createConnection({
+        host: this.host,
+        user: this.username,
+        password: this.password,
+        database: this.database,
+      });
       console.log('Conectado ao banco de dados com sucesso!');
     } catch (error) {
       throw new Error('Erro ao conectar ao banco de dados');
@@ -36,7 +40,6 @@ class DatabaseService {
       throw new Error('Erro ao encerrar conexão com o banco de dados');
     }
   }
-
 
   async criarUsuario(userData) {
     try { //ESTOU EM DÚVIDA QUANTO A FORAM QUE SE USA ESTE 'query' que também é usado nos controller, É UM MÉTODO ou apenas UM PEDIDO DE DADOS?
