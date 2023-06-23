@@ -5,8 +5,9 @@ const IndexRoutes = require ('../routes/index');
 //const ReceitasController = require ('../controllers/receitasController');
 const BuscarReceitasCommand = require ('../command/buscarReceitasCommand');
 const ReceitasMemento = require ('../memento/receitasMemento');
+const TemplateM = require('./templateM');
 
-class AppTemplate {
+class AppTemplate extends TemplateM{
     configurarServidor(){
         //configurar o servidor
         const servidor = new Servidor();
